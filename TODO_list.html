@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list</title>
+    <style>
+        body{
+            background-color: rgb(239, 239, 193);
+        }
+       
+        .title{
+            font-weight: bold;
+            font-size: 50px;
+            border: 2px solid white;
+            border-width: 4px;
+          text-align: center;
+           
+          
+
+
+        }
+        u{
+            font-style: italic;
+        }
+        #insert{
+            width: 97vw;
+            height: 30px;
+            padding: 4px;
+            margin: 5px;
+            border: 2px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
+       .button{
+            cursor: pointer;
+            margin: 3px;
+            padding: 2px;
+            float: right;
+       }
+       .button:hover{
+            background-color: aqua;
+       }
+       .list_item{
+            font-size: 30px;
+       }
+    </style>
+</head>
+
+<body>
+    <div class="title" ><u>to-do</u> LIST</div>
+    <div id="input"><input id="insert" type="text">
+        <button class="button" type="button" id="sendInpurt" onclick="insert()">include</button>
+        <button class="button" id="delete" onclick="remove()">delete</button>
+    </div>
+    <ol id="container"></ol>
+    <script>
+        let i = 0;
+        function insert() {
+           while (true) {
+                let inputval = document.getElementById("insert");
+                localStorage.setItem(i, inputval.value)
+                let a = (localStorage.getItem(i))
+                // alert(inputval)
+
+                let content = document.getElementById("container")
+                content.innerHTML += "<li class='list_item'>" + a + "</li>"
+                
+                i++;
+                break;
+
+                
+           }
+
+        }
+
+        function remove(){
+            let choice = prompt("Enter the number of the node you want to remove :");
+            //choice = Number.parseInt(choice);
+            localStorage.removeItem(choice -1);
+            let content = document.getElementById("container")
+            let content_child = content.childNodes[choice - 1];
+            content.removeChild(content_child);
+            i--;
+               
+
+        }
+
+    </script>
+</body>
+
+</html>
