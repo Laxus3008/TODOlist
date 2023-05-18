@@ -61,7 +61,7 @@
         function insert() {
            while (true) {
                 let inputval = document.getElementById("insert");
-                localStorage.setItem(i, inputval.value)
+                localStorage.setItem(i,JSON.stringify(inputval.value))
                 let a = (localStorage.getItem(i))
                 // alert(inputval)
 
