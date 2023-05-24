@@ -25,6 +25,15 @@
         u{
             font-style: italic;
         }
+        #title{
+            width: 97vw;
+            height: 30px;
+            padding: 4px;
+            margin: 5px;
+            border: 2px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
         #insert{
             width: 97vw;
             height: 30px;
@@ -51,24 +60,40 @@
 
 <body>
     <div class="title" ><u>to-do</u> LIST</div>
-    <div id="input"><input id="insert" type="text">
+    <div id="input">
+        <h3>Title:</h3>
+        <input type="text" id="title">
+        <h3>Enter your ToDos:</h3>
+        <input id="insert" type="text">
         <button class="button" type="button" id="sendInpurt" onclick="insert()">include</button>
         <button class="button" id="delete" onclick="remove()">delete</button>
+        <button class="button" id="showtodo" onclick="showtodo()">show todos</button>
     </div>
     <ol id="container"></ol>
+    <h3>stored ToDos will be displayed here : </h3>
+    <ol id="storedtodo"></ol>
     <script>
-        let i = 0;
+        function showtodo(){
+            let title = prompt("Enter the title of your todo :")
+            let a = localStorage.getItem(title);
+            let storedtodo = document.getElementById("storedtodo");
+            storedtodo.innerHTML += "<li class='list_item'>" + a + "</li>"
+
+        }
+       
         function insert() {
+            
            while (true) {
+                let inputtitle = document.getElementById("title");
                 let inputval = document.getElementById("insert");
-                localStorage.setItem(i,JSON.stringify(inputval.value))
-                let a = (localStorage.getItem(i))
+                localStorage.setItem(inputtitle.value,JSON.stringify(inputval.value) )
+                let a = (localStorage.getItem(inputtitle.value))
                 // alert(inputval)
 
                 let content = document.getElementById("container")
                 content.innerHTML += "<li class='list_item'>" + a + "</li>"
                 
-                i++;
+                
                 break;
 
                 
@@ -77,13 +102,13 @@
         }
 
         function remove(){
-            let choice = prompt("Enter the number of the node you want to remove :");
+            let choice = prompt("Enter the title of list you want to remove :");
             //choice = Number.parseInt(choice);
-            localStorage.removeItem(choice -1);
+            localStorage.removeItem(choice);
             let content = document.getElementById("container")
             let content_child = content.childNodes[choice - 1];
             content.removeChild(content_child);
-            i--;
+            
                
 
         }
